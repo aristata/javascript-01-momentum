@@ -34,6 +34,8 @@ if (isNaN(age) || age < 0) {
   console.log("마이 묵고 가이소~");
 } else if (age >= 50 && age < 80) {
   console.log("건강 생각해서 좀만 드시지예");
-} else {
+} else if (age === 100) {
+  console.log("우와");
+} else if (age > 80) {
   console.log("먹고 싶으면 먹어야죠");
 }
