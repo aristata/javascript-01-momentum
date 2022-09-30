@@ -13,7 +13,9 @@ const notANumber = parseInt("lalala");
 console.log(notANumber, typeof notANumber);
 
 // isNaN 함수는 인수가 NaN인지 아닌지를 판단한다
-const age = parseInt(prompt("니 몇살이고?"));
+const age = parseInt(
+  prompt("미성년자는 음주 판매 금지입니다. 신분증 제시해 주세요")
+);
 console.log(isNaN(age));
 
 // if (조건) {
@@ -22,8 +24,16 @@ console.log(isNaN(age));
 //   조건이 거짓일때
 // }
 // 조건에는 true or false 값을 주는 변수나 함수가 들어와야 한다
-if (isNaN(age)) {
-  alert("숫자를 입력해라");
+// 조건을 여러개 쓰고 싶다면 else if 를 사용한다
+// 또는 &&(And) 와 ||(Or) 을 사용할 수도 있다
+if (isNaN(age) || age < 0) {
+  alert("양의 정수를 입력해라");
+} else if (age < 18) {
+  console.log("엄마젖 더 먹고 온나");
+} else if (age >= 18 && age < 50) {
+  console.log("마이 묵고 가이소~");
+} else if (age >= 50 && age < 80) {
+  console.log("건강 생각해서 좀만 드시지예");
 } else {
-  console.log("참 잘했어요");
+  console.log("먹고 싶으면 먹어야죠");
 }
