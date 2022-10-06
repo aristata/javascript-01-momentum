@@ -15,9 +15,9 @@ const clockElement = document.querySelector("#clock");
 
 function getDateTimes() {
   const now = new Date();
-  const hour = now.getHours();
-  const minute = now.getMinutes();
-  const second = now.getSeconds();
+  const hour = String(now.getHours()).padStart(2, "0");
+  const minute = String(now.getMinutes()).padStart(2, "0");
+  const second = String(now.getSeconds()).padStart(2, "0");
   clockElement.innerText = `${hour}:${minute}:${second}`;
 }
 
