@@ -2,12 +2,11 @@ const todosFormElement = document.querySelector("#todos");
 const todosInputElement = todosFormElement.querySelector("input");
 const todoListElement = document.querySelector("#todoList");
 
-// todo가 저장될 배열
+const TODOS_KEY = "todos";
 const todos = [];
 
-// 로컬스토리지에 todos 를 저장하는 함수
 function saveTodos() {
-  localStorage.setItem("todos", JSON.stringify(todos));
+  localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
 }
 
 function deleteTodo(event) {
@@ -35,10 +34,15 @@ function todoSubmitHandler(event) {
   const newTodo = todosInputElement.value;
   todosInputElement.value = "";
   paintTodo(newTodo);
-  // newTodo 를 todos 배열에 추가
   todos.push(newTodo);
-  // 로컬스토리지에 저장하는 함수를 호출
   saveTodos();
 }
 
 todosFormElement.addEventListener("submit", todoSubmitHandler);
+
+// 로컬스토리지에서 데이터 조회
+const savedTodos = localStorage.getItem(TODOS_KEY);
+if (saveTodos !== null) {
+  const parsedTodos = JSON.parse(savedTodos);
+  parsedTodos.forEach((item) => console.log(`item => ${item}`));
+}
