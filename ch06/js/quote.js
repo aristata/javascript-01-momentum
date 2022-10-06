@@ -65,4 +65,4 @@ function getRandomQuote() {
 
 const randomQuote = getRandomQuote();
 quoteSpanElement.innerText = randomQuote.quote;
-authorSpanElement.innerText = randomQuote.author;
+authorSpanElement.innerText = `By ${randomQuote.author}`;
