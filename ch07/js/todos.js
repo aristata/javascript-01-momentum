@@ -18,7 +18,7 @@ function saveTodos(newTodoObject) {
  */
 function deleteTodo(event) {
   const parentLi = event.target.parentNode;
-
+  console.log("parentLi.id", parentLi.id);
   parentLi.remove();
 }
 
@@ -27,6 +27,7 @@ function deleteTodo(event) {
  */
 function paintTodo(newTodoObject) {
   const li = document.createElement("li");
+  li.id = newTodoObject.id;
   const span = document.createElement("span");
   span.innerText = newTodoObject.content;
 
