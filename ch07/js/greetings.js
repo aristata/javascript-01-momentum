@@ -2,6 +2,8 @@
 const loginForm = document.querySelector("#login-form");
 const loginInput = loginForm.querySelector("input");
 const greeting = document.querySelector("#greeting");
+const todosFormElement = document.querySelector("#todos");
+const todoListElement = document.querySelector("#todoList");
 
 const HIDDEN_CLASSNAME = "hidden";
 const USERNAME_KEY = "userName";
@@ -17,6 +19,8 @@ function submitHandler(event) {
 function paintGreetings(userName) {
   greeting.innerText = `${userName} 님, 환영합니다 :)`;
   greeting.classList.remove(HIDDEN_CLASSNAME);
+  todosFormElement.classList.remove(HIDDEN_CLASSNAME);
+  todoListElement.classList.remove(HIDDEN_CLASSNAME);
 }
 
 const savedUserName = localStorage.getItem(USERNAME_KEY);
@@ -28,4 +32,6 @@ if (savedUserName === null) {
 } else {
   // show the greeting
   paintGreetings(savedUserName);
+  todosFormElement.classList.remove(HIDDEN_CLASSNAME);
+  todoListElement.classList.remove(HIDDEN_CLASSNAME);
 }

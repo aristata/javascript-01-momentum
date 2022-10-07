@@ -1,24 +1,34 @@
-const todosFormElement = document.querySelector("#todos");
 const todosInputElement = todosFormElement.querySelector("input");
-const todoListElement = document.querySelector("#todoList");
 
 const TODOS_KEY = "todos";
+const ID_KEY = "last_id";
 let todos = [];
 
-function saveTodos() {
+/**
+ * 저장
+ */
+function saveTodos(newTodoObject) {
+  todos.push(newTodoObject);
   localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
+  localStorage.setItem(ID_KEY, newTodoObject.id);
 }
 
+/**
+ * 삭제
+ */
 function deleteTodo(event) {
   const parentLi = event.target.parentNode;
 
   parentLi.remove();
 }
 
-function paintTodo(newTodo) {
+/**
+ * 그리기
+ */
+function paintTodo(newTodoObject) {
   const li = document.createElement("li");
   const span = document.createElement("span");
-  span.innerText = newTodo;
+  span.innerText = newTodoObject.content;
 
   const button = document.createElement("button");
   button.innerText = "❌";
@@ -29,24 +39,34 @@ function paintTodo(newTodo) {
   todoListElement.appendChild(li);
 }
 
+/**
+ * 서브밋
+ */
 function todoSubmitHandler(event) {
   event.preventDefault();
   const newTodo = todosInputElement.value;
   todosInputElement.value = "";
-  paintTodo(newTodo);
-  todos.push(newTodo);
-  saveTodos();
+  const newTodoObject = {
+    id: parseInt(localStorage.getItem(ID_KEY)) + 1,
+    content: newTodo,
+    createdAt: Date.now()
+  };
+  paintTodo(newTodoObject);
+  saveTodos(newTodoObject);
 }
 
 todosFormElement.addEventListener("submit", todoSubmitHandler);
 
-/* 로컬스토리지에서 데이터 조회 */
 const savedTodos = localStorage.getItem(TODOS_KEY);
 if (saveTodos !== null) {
   const parsedTodos = JSON.parse(savedTodos);
-  // 로컨스토리지에 있는 데이터를 배열에 담는다
-  todos = parsedTodos;
+  console.log("parsedTodos", parsedTodos);
+  todos = parsedTodos ? parsedTodos : [];
+  console.log("todos", todos);
+  parsedTodos?.forEach((item) => paintTodo(item));
+}
 
-  // 로컬스토리지에 있는 데이터를 조회하여 화면에 todo를 그린다
-  parsedTodos.forEach((item) => paintTodo(item));
+const lastId = localStorage.getItem(ID_KEY);
+if (lastId === null) {
+  localStorage.setItem(ID_KEY, 0);
 }
