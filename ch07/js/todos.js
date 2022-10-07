@@ -3,7 +3,7 @@ const todosInputElement = todosFormElement.querySelector("input");
 const todoListElement = document.querySelector("#todoList");
 
 const TODOS_KEY = "todos";
-const todos = [];
+let todos = [];
 
 function saveTodos() {
   localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
@@ -40,9 +40,13 @@ function todoSubmitHandler(event) {
 
 todosFormElement.addEventListener("submit", todoSubmitHandler);
 
-// 로컬스토리지에서 데이터 조회
+/* 로컬스토리지에서 데이터 조회 */
 const savedTodos = localStorage.getItem(TODOS_KEY);
 if (saveTodos !== null) {
   const parsedTodos = JSON.parse(savedTodos);
-  parsedTodos.forEach((item) => console.log(`item => ${item}`));
+  // 로컨스토리지에 있는 데이터를 배열에 담는다
+  todos = parsedTodos;
+
+  // 로컬스토리지에 있는 데이터를 조회하여 화면에 todo를 그린다
+  parsedTodos.forEach((item) => paintTodo(item));
 }
