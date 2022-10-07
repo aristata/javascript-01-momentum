@@ -18,8 +18,9 @@ function saveTodos(newTodoObject) {
  */
 function deleteTodo(event) {
   const parentLi = event.target.parentNode;
-  console.log("parentLi.id", parentLi.id);
   parentLi.remove();
+  todos = todos.filter((item) => item.id !== parseInt(parentLi.id));
+  localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
 }
 
 /**
