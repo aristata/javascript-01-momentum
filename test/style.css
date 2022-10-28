@@ -1,0 +1,19 @@
+body {
+  background-color: beige;
+}
+
+h1 {
+  color: blue;
+}
+
+.whiteText {
+  color: white;
+}
+
+.redText {
+  color: red;
+}
+
+.blackText {
+  color: black;
+}
